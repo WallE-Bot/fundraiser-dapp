@@ -24,7 +24,7 @@ const FundraiserCard = props => {
   const classes = useStyles();
   const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
-  const [ contract, setContrract ] = useState(null)
+  const [ contract, setContract ] = useState(null)
   const [ accounts, setAccounts ] = useState(null)
   const [ fundName, setFundName ] = useState(null)
   const [ description, setDescription ] = useState(null)
@@ -33,9 +33,43 @@ const FundraiserCard = props => {
   const [ imageURL, setImageURL ] = useState(null)
   const [ url, setURL ] = useState(null)
 
-  useEffect(() => {
+  useEffect((fundraiser) => {
+    if(fundraiser) {
+      init(fundraiser);
+    }
+  }, [{}]);
 
-  }, [])
+  const init = async fundraiser => {
+    try {
+      const fund = fundraiser;
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = FundraiserContract.networks[networkId];
+      const accounts = await web3.eth.getAccounts();
+      const instance = new web3.eth.Contract(
+        FundraiserContract.abi,
+        fund
+      );
+      setContract(instance);
+      setAccounts(accounts);
+
+      const name = await instance.methods.name().call();
+      const description = await instance.methods.description().call();
+      const totalDonations = await instance.methods.totalDonations().call();
+      const imageURL = await instance.methods.imageURL().call();
+      const url = await instance.methods.url().call();
+
+      setFundName(name);
+      setDescription(description);
+      setImageURL(imageURL);
+      setTotalDonations(totalDonations);
+      setURL(url);
+    } catch(error) {
+      alert(
+        `Failed to load web3, accounts, or contract, Check console for details.`
+      );
+      console.error(error);
+    }
+  };
 
   return (
     <div className='fundraiser-card-content'>

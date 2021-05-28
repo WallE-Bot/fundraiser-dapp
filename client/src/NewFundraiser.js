@@ -19,19 +19,17 @@ const NewFundraiser = () => {
   useEffect(() => {
     init();
   }, []);
-  
+
   const init = async () => {
     try {
       const web3 = await getWeb3();
       const networkId = await web3.eth.net.getId()
       const deployedNetwork = FactoryContract.networks[networkId];
       const accounts = await web3.eth.getAccounts();
-      console.log(deployedNetwork.address);
       const instance = new web3.eth.Contract(
         FactoryContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      console.log(instance, accounts)
       setContract(instance)
       setAccounts(accounts)
 
@@ -71,7 +69,6 @@ const NewFundraiser = () => {
   const classes = useStyles();
 
   const handleSubmit = async () => {
-    console.log(contract)
     await contract.methods.createFundraiser(
       name,
       website,
