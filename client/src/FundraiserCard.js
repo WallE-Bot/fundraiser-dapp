@@ -7,6 +7,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import FundraiserContract from './contracts/Fundraiser.json';
 import Web3 from 'web3';
 
@@ -38,6 +43,7 @@ const FundraiserCard = props => {
   const [ donationCount, setDonationCount ] = useState(null)
   const [ imageURL, setImageURL ] = useState(null)
   const [ url, setURL ] = useState(null)
+  const [ modalState, setModalState ] = useState(false);
 
   useEffect(() => {
     if (props.fundraiser) {
@@ -77,15 +83,36 @@ const FundraiserCard = props => {
     }
   };
 
-  const handleOpen = () => {
-
+  const toggleModal = () => {
+    const currentModalState = modalState;
+    setModalState(!currentModalState);
   }
 
   return (
     <div className='fundraiser-card-content'>
+      <Dialog
+        open={modalState}
+        onClose={toggleModal}
+        aria-labelledby='form-dialog-title'
+      >
+        <DialogTitle id='form-dialog-title'>
+          Donate to {fundName}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <img src={imageURL} width='200px'  height='200px' />
+            <p>{description}</p>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={toggleModal} color='primary'>
+            Cance
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Card
         className={classes.card}
-        onClick={handleOpen}
+        onClick={setModalState}
       >
         <CardActionArea>
           <CardMedia
@@ -107,7 +134,7 @@ const FundraiserCard = props => {
           <Button
             size='small'
             color='primary'
-            onClick={handleOpen}
+            onClick={setModalState}
             variant='contained'
             className={classes.button}
           >
