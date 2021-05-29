@@ -90,6 +90,26 @@ const FundraiserCard = props => {
 
   return (
     <div className='fundraiser-card-content'>
+      <Dialog
+        open={modalState}
+        onClose={toggleModal}
+        aria-labelledby='form-dialog-title'
+      >
+        <DialogTitle id='form-dialog-title'>
+          Donate to {fundName}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <img src={imageURL} width='200px'  height='200px' />
+            <p>{description}</p>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={toggleModal} color='primary'>
+            Cance
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Card
         className={classes.card}
         onClick={setModalState}
