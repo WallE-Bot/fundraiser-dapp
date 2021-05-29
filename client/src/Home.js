@@ -23,6 +23,7 @@ const Home = () => {
         FactoryContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
+
       setContract(instance)
       setAccounts(accounts)
 

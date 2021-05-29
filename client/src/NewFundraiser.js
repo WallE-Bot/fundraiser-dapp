@@ -33,6 +33,8 @@ const NewFundraiser = () => {
       setContract(instance)
       setAccounts(accounts)
 
+      console.log(contract)
+
       const funds = await instance.methods.fundraisers(10,0).call();
       setFunds(funds);
     } catch(error) {
