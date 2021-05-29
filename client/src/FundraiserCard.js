@@ -19,15 +19,12 @@ const FundraiserCard = props => {
     media: {
       height: 140
     },
-<<<<<<< HEAD
-=======
     button: {
       margin: '5px'
     },
     input: {
       display: 'none'
     }
->>>>>>> 61abda2f54b23f237a88811be424fd005d1186c9
   });
 
   const classes = useStyles();
@@ -80,11 +77,6 @@ const FundraiserCard = props => {
     }
   };
 
-<<<<<<< HEAD
-  return (
-    <div className='fundraiser-card-content'>
-      <Card className={classes.card}>
-=======
   const handleOpen = () => {
 
   }
@@ -95,7 +87,6 @@ const FundraiserCard = props => {
         className={classes.card}
         onClick={handleOpen}
       >
->>>>>>> 61abda2f54b23f237a88811be424fd005d1186c9
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -113,9 +104,6 @@ const FundraiserCard = props => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-<<<<<<< HEAD
-          <Button size='small' color='primary'>
-=======
           <Button
             size='small'
             color='primary'
@@ -123,7 +111,6 @@ const FundraiserCard = props => {
             variant='contained'
             className={classes.button}
           >
->>>>>>> 61abda2f54b23f237a88811be424fd005d1186c9
             View More
           </Button>
         </CardActions>
