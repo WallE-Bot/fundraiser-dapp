@@ -77,15 +77,16 @@ const FundraiserCard = props => {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={props.fundraiser.image}
+            image={imageURL}
             title="Fundraiser Image"
+            component='img'
           />
           <CardContent>
             <Typography gutterBottom variant='h5' component='h2'>
               {fundName}
             </Typography>
             <Typography variant='body2' color='textSecondary' component='p'>
-              <p>{description}</p>
+              {description}
             </Typography>
           </CardContent>
         </CardActionArea>

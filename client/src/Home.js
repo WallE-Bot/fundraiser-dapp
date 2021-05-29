@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FundraiserCard from './FundraiserCard';
 import getWeb3 from './getWeb3';
 import FactoryContract from './contracts/FundraiserFactory.json';
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
   const [ funds, setFunds ] = useState([]);
@@ -38,7 +39,10 @@ const Home = () => {
   const displayFundraisers = () => {
     return funds.map(fundraiser => {
       return (
-        <FundraiserCard fundraiser={fundraiser} />
+        <FundraiserCard
+          fundraiser={fundraiser}
+          key={uuidv4()}
+        />
       )
     });
   }
